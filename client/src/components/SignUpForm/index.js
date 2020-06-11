@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Container, Button } from "reactstrap";
+import axios from "axios";
 class SignUpForm extends Component {
     constructor(props){
         super(props);
@@ -28,11 +29,19 @@ class SignUpForm extends Component {
         break;
     };
   };
+  handeSubmit = () => {
+      axios.post("/api/signup", {
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
+          email: this.state.email,
+          password: this.state.password
+      });
+  };
   render() {
     return (
       <div>
         <Container>
-          <form>
+          <form onSubmit={() => {this.handeSubmit();}}>
             <input
               onChange={(event) => {
                 this.handeChange(event);
@@ -65,7 +74,7 @@ class SignUpForm extends Component {
               required
               name="password"
             ></input>
-            <Button color="primary">Submit</Button>
+            <Button type="submit"  color="primary">Submit</Button>
           </form>
         </Container>
       </div>
