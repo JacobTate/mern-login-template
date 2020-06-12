@@ -2,46 +2,62 @@ import React, { Component } from "react";
 import { Container, Button } from "reactstrap";
 import axios from "axios";
 class SignUpForm extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            firstName: "",
-            lastName: "",
-            email: "",
-            password: ""
-        };
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
     };
+  }
   handeChange = (event) => {
     const inputName = event.target.name;
     const inputValue = event.target.value;
     switch (inputName) {
       case "firstName":
-          this.setState({firstName: inputValue});
+        this.setState({ firstName: inputValue });
         break;
       case "lastName":
-        this.setState({lastName: inputValue});
+        this.setState({ lastName: inputValue });
         break;
       case "email":
-        this.setState({email: inputValue});
+        this.setState({ email: inputValue });
         break;
       case "password":
-        this.setState({password: inputValue});
+        this.setState({ password: inputValue });
         break;
+        default:
+          alert("An unaccepted error occurred");
+          break;
     };
   };
   handeSubmit = () => {
-      axios.post("/api/signup", {
-          firstName: this.state.firstName,
-          lastName: this.state.lastName,
-          email: this.state.email,
-          password: this.state.password
+    axios
+      .post("/api/signup", {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        password: this.state.password,
+      })
+      .then((err) => {
+        if (err.data.error) {
+          alert(`A user with this email already exists.`);
+        } else {
+          window.location.reload(false);
+        };
       });
   };
   render() {
     return (
       <div>
         <Container>
-          <form onSubmit={() => {this.handeSubmit();}}>
+          <form
+            onSubmit={(event) => {
+              this.handeSubmit();
+              event.preventDefault();
+            }}
+          >
             <input
               onChange={(event) => {
                 this.handeChange(event);
@@ -74,7 +90,9 @@ class SignUpForm extends Component {
               required
               name="password"
             ></input>
-            <Button type="submit"  color="primary">Submit</Button>
+            <Button type="submit" color="primary">
+              Submit
+            </Button>
           </form>
         </Container>
       </div>
