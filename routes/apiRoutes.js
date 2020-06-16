@@ -19,18 +19,27 @@ module.exports = (app) => {
           email: userData.email,
           password: userData.password,
         });
-        return res.json({error: false});
-      };
+        return res.json({ error: false });
+      }
     });
   });
   app.post("/api/login/", (req, res) => {
-    Users.find({ email: req.body.email }).then((data) => {
-      console.log(data);
-      if (req.body.password === data[0].password) {
-        console.log(data[0].email);
-      } else {
-        console.log("error");
-      }
-    });
+    Users.findOne({ email: req.body.email })
+      .then((data) => {
+        if (data !== null) {
+          if (data.password === req.body.password) {
+            res.json({ data, error: false });
+          } else {
+            res.json({ data: null, error: true });
+          };
+        } else {
+          res.json({data, error: true})
+        };
+      })
+      .catch((err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
   });
 };

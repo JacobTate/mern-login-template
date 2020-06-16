@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Button } from "reactstrap";
-import axios from 'axios';
+import axios from "axios";
 class LoginForm extends Component {
   constructor(props) {
     super(props);
@@ -19,15 +19,25 @@ class LoginForm extends Component {
       case "password":
         this.setState({ password: inputValue });
         break;
+      default:
+        alert("An unaccepted error occurred");
+        break;
     }
   };
   handeSubmit = () => {
-    axios.post(`/api/login`, {
-      email: this.state.email,
-      password: this.state.password
-    });
-    console.log(this.state.email);
-    
+    axios
+      .post(`/api/login`, {
+        email: this.state.email,
+        password: this.state.password,
+      })
+      .then((res) => {
+        console.log(res);
+        if (!res.data.error) {
+        } else {
+        alert("somthing was incorrect");
+        }
+        // localStorage.setItem("LoginTemplateUser", [res.data.email, res.data.password]);
+      });
   };
   render() {
     return (
