@@ -33,10 +33,16 @@ class LoginForm extends Component {
       .then((res) => {
         console.log(res);
         if (!res.data.error) {
+          sessionStorage.setItem("LoginTemplateUser", [
+            res.data.data.email
+          ]);
+          sessionStorage.setItem("LoginTemplatePassword", [
+            res.data.data.password
+          ]);
+          window.location.reload(false);
         } else {
-        alert("somthing was incorrect");
+          alert("somthing was incorrect");
         }
-        // localStorage.setItem("LoginTemplateUser", [res.data.email, res.data.password]);
       });
   };
   render() {
