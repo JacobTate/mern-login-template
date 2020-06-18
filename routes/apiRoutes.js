@@ -31,15 +31,27 @@ module.exports = (app) => {
             res.json({ data, error: false });
           } else {
             res.json({ data: null, error: true });
-          };
+          }
         } else {
-          res.json({data, error: true})
-        };
+          res.json({ data, error: true });
+        }
       })
       .catch((err) => {
         if (err) {
           console.log(err);
         }
       });
+  });
+  app.post("/api/getUserInfo", (req, res) => {
+    const userInfo = req.body;
+    Users.findOne({
+      email: userInfo.email,
+      password: userInfo.password,
+    }).then((data) => {
+     // console.log(data);
+      if(data){
+        res.json(data);
+      };
+    });
   });
 };

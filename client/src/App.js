@@ -18,11 +18,11 @@ class App extends Component {
               <Route path="/login">
                 <Login />
               </Route>
-              <Route path="/">
-                <HomePage />
-              </Route>
               <Route path="/profile">
                 <ProfilePage />
+              </Route>
+              <Route path="/">
+                <HomePage />
               </Route>
             </Switch>
           </div>
