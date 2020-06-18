@@ -39,7 +39,7 @@ class LoginForm extends Component {
           sessionStorage.setItem("LoginTemplatePassword", [
             res.data.data.password
           ]);
-          window.location.reload(false);
+          window.location.replace("/");
         } else {
           alert("somthing was incorrect");
         }

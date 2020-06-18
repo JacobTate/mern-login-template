@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import HomePage from "../src/Pages/home";
 import Login from "../src/Pages/login";
 import Signup from "../src/Pages/signUp";
+import ProfilePage from "../src/Pages/Profile";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
-
 class App extends Component {
   render() {
     return (
@@ -20,6 +20,9 @@ class App extends Component {
               </Route>
               <Route path="/">
                 <HomePage />
+              </Route>
+              <Route path="/profile">
+                <ProfilePage />
               </Route>
             </Switch>
           </div>

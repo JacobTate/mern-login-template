@@ -13,6 +13,7 @@ function Nav(props) {
       ) : (
         <NavLink href={"/login"}>Login</NavLink>
       )}
+      <NavLink href="/profile">Profile</NavLink>
     </Navbar>
   );
 }
