@@ -7,37 +7,33 @@ userInfo.getUserData();
 class ProfilePage extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      userFName: "",
+      userLName: "",
+      userEmail: "",
+    };
   }
   componentDidMount() {
     
-    setTimeout(function(){
-      console.log(userInfo.showUserData().email); 
-   }, 2000);
+    setTimeout(() =>{
+      console.log(userInfo.showUserData());
+      const userData = userInfo.showUserData();
+      this.setState({
+        userFName: userData.firstName,
+        userLName: userData.lastName,
+        userEmail: userData.email
+      });
+   }, 500);
   }
 
-  testFunction = () => {
-    
-    
-//     console.log(userCreds);
-//    const userInfo = getUserInfo(userCreds.email, userCreds.password);
-//    console.log(userInfo);
-//userInfo.getUserData()
-
-
-// return(
-//     <div>
-//         <getUserInfo 
-//         email={userCreds.email}
-//         password={userCreds.password}
-//         />
-//     </div>
-// );
-  };
   render() {
     return (
       <div>
-        <button onClick={() => {this.testFunction()}}>test</button>
+        <ul>
+    <li>{this.state.userFName}</li>
+    <li>{this.state.userLName}</li>
+    <li>{this.state.userEmail}</li>
+        </ul>
       </div>
     );
   }
