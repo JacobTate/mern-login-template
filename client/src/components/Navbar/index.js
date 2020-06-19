@@ -9,11 +9,19 @@ function Nav(props) {
   return (
     <Navbar color="primary">
       {props.isLoggedIn ? (
-        <button onClick={() => {logOut()}}>You are logged in click to log out</button>
+        <button
+          onClick={() => {
+            logOut();
+          }}
+        >
+          You are logged in click to log out
+        </button>
       ) : (
         <NavLink href={"/login"}>Login</NavLink>
       )}
-      <NavLink href="/profile">Profile</NavLink>
+      {props.isLoggedIn ? (
+        <NavLink href="/profile">Profile</NavLink>
+      ) : null}
     </Navbar>
   );
 }

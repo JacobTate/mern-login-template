@@ -32,21 +32,30 @@ export class getUserInfo {
     this.email = email;
     this.password = password;
     this.state = {
-        email,
-        password,
-        userInfo: {}
-    }
-  };
-  getUserData(){
-     // return `email: ${this.state.email} password: ${this.state.password}`;
-      axios.post(`/api/getUserInfo/`, {
-    email: this.state.email,
-    password: this.state.password
-}).then(res => {
-this.state.userInfo = res.data
-});
-
-return this.state.userInfo;
-
+      email,
+      password,
+      userInfo: {},
+    };
   }
-}
+ getUserData(){
+    // return `email: ${this.state.email} password: ${this.state.password}`;
+    axios
+      .post(`/api/getUserInfo/`, {
+        email: this.state.email,
+        password: this.state.password,
+      })
+      .then((res) => {
+        this.state.userInfo = res.data;
+        console.log(res.data);
+        
+      });
+
+    //return this.state.userInfo;
+    // if (Object.keys(this.state.userInfo).length > 0) {
+    //   return this.state.userInfo;
+    // };
+  };
+ showUserData (){
+    return this.state.userInfo;
+ }
+};
