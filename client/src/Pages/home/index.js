@@ -14,7 +14,7 @@ class HomePage extends Component {
     };
   }
   render() {
-    return this.state.isUserLoggedIn ? <Nav isLoggedIn={true}/> : <Nav isLoggedIn={false}/>;
+    return <Nav isLoggedIn={this.state.isUserLoggedIn}/>
   }
 }
 export default HomePage;

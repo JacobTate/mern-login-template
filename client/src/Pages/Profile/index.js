@@ -1,9 +1,15 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { sessionStorageCheck, getUserInfo } from "../../utils/userLoginCheck";
 const userCreds = sessionStorageCheck();
-const userInfo = new getUserInfo(userCreds.email, userCreds.password);
-userInfo.getUserData();
+//if(userCreds.email !== null && userCreds.password !== null){
+  var userInfo = new getUserInfo(userCreds.email, userCreds.password);
+  userInfo.getUserData();
+//}else{
+ // backToHome();
+//}
+function backToHome(){
+ //window.location.replace("/");
+}
 class ProfilePage extends Component {
   constructor(props) {
     super(props);
@@ -14,9 +20,7 @@ class ProfilePage extends Component {
     };
   }
   componentDidMount() {
-    
     setTimeout(() =>{
-      console.log(userInfo.showUserData());
       const userData = userInfo.showUserData();
       this.setState({
         userFName: userData.firstName,
@@ -29,6 +33,7 @@ class ProfilePage extends Component {
   render() {
     return (
       <div>
+        <a href="/">Home</a>
         <ul>
     <li>{this.state.userFName}</li>
     <li>{this.state.userLName}</li>

@@ -1,13 +1,11 @@
 import React from "react";
 import { Navbar, NavLink } from "reactstrap";
+import {logOut} from "../../utils/userLoginCheck";
 function Nav(props) {
-  function logOut() {
-    sessionStorage.removeItem("LoginTemplateUser");
-    sessionStorage.removeItem("LoginTemplatePassword");
-    window.location.reload(false);
-  }
+  sessionStorage.setItem("isLoggedIn", [props.isLoggedIn])
   return (
     <Navbar color="primary">
+      <NavLink href={"/"}>Home</NavLink>
       {props.isLoggedIn ? (
         <button
           onClick={() => {

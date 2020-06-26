@@ -39,6 +39,7 @@ class LoginForm extends Component {
           sessionStorage.setItem("LoginTemplatePassword", [
             res.data.data.password
           ]);
+          sessionStorage.setItem("isLoggedIn", [true])
           window.location.replace("/");
         } else {
           alert("somthing was incorrect");
