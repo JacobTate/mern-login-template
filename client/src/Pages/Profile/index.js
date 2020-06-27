@@ -1,15 +1,8 @@
 import React, { Component } from "react";
 import { sessionStorageCheck, getUserInfo } from "../../utils/userLoginCheck";
 const userCreds = sessionStorageCheck();
-//if(userCreds.email !== null && userCreds.password !== null){
   var userInfo = new getUserInfo(userCreds.email, userCreds.password);
   userInfo.getUserData();
-//}else{
- // backToHome();
-//}
-function backToHome(){
- //window.location.replace("/");
-}
 class ProfilePage extends Component {
   constructor(props) {
     super(props);
@@ -20,14 +13,18 @@ class ProfilePage extends Component {
     };
   }
   componentDidMount() {
-    setTimeout(() =>{
-      const userData = userInfo.showUserData();
-      this.setState({
-        userFName: userData.firstName,
-        userLName: userData.lastName,
-        userEmail: userData.email
-      });
-   }, 500);
+    if(userCreds.isLoggedIn == "false"){
+      alert("Must be sigined in to view profile page");
+      window.location.replace("/");
+    };
+      setTimeout(() =>{
+        const userData = userInfo.showUserData();
+        this.setState({
+          userFName: userData.firstName,
+          userLName: userData.lastName,
+          userEmail: userData.email
+        });
+     }, 500);
   }
 
   render() {

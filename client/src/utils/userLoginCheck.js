@@ -3,9 +3,7 @@ export function sessionStorageCheck() {
   const getUser = sessionStorage.getItem("LoginTemplateUser");
   const getPassword = sessionStorage.getItem("LoginTemplatePassword");
   const isLoggedIn = sessionStorage.getItem("isLoggedIn");
-  if(isLoggedIn){
-    return { email: getUser, password: getPassword };
-  }
+    return {isLoggedIn: isLoggedIn, email: getUser, password: getPassword };
 }
 export class getUserInfo {
   constructor(email, password) {
