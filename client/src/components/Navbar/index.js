@@ -5,7 +5,8 @@ function Nav(props) {
   sessionStorage.setItem("isLoggedIn", [props.isLoggedIn])
   return (
     <Navbar color="primary">
-      <NavLink href={"/"}>Home</NavLink>
+      
+      {props.showHome ? <NavLink href={"/"}>Home</NavLink>: null}
       {props.isLoggedIn ? (
         <button
           onClick={() => {

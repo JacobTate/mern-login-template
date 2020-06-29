@@ -16,7 +16,6 @@ export class getUserInfo {
     };
   }
  getUserData(){
-    // return `email: ${this.state.email} password: ${this.state.password}`;
     axios
       .post(`/api/getUserInfo/`, {
         email: this.state.email,
@@ -27,11 +26,6 @@ export class getUserInfo {
         console.log(res.data);
         
       });
-
-    //return this.state.userInfo;
-    // if (Object.keys(this.state.userInfo).length > 0) {
-    //   return this.state.userInfo;
-    // };
   };
  showUserData (){
     return this.state.userInfo;
