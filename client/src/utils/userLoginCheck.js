@@ -3,7 +3,7 @@ export function sessionStorageCheck() {
   const getUser = sessionStorage.getItem("LoginTemplateUser");
   const getPassword = sessionStorage.getItem("LoginTemplatePassword");
   const isLoggedIn = sessionStorage.getItem("isLoggedIn");
-    return {isLoggedIn: isLoggedIn, email: getUser, password: getPassword };
+  return { isLoggedIn: isLoggedIn, email: getUser, password: getPassword };
 }
 export class getUserInfo {
   constructor(email, password) {
@@ -15,7 +15,7 @@ export class getUserInfo {
       userInfo: {},
     };
   }
- getUserData(){
+  getUserData() {
     axios
       .post(`/api/getUserInfo/`, {
         email: this.state.email,
@@ -24,16 +24,15 @@ export class getUserInfo {
       .then((res) => {
         this.state.userInfo = res.data;
         console.log(res.data);
-        
       });
-  };
- showUserData (){
+  }
+  showUserData() {
     return this.state.userInfo;
- }
-};
-export function logOut(){
+  }
+}
+export function logOut() {
   sessionStorage.removeItem("LoginTemplateUser");
   sessionStorage.removeItem("LoginTemplatePassword");
-  sessionStorage.setItem("isLoggedIn", [false])
+  sessionStorage.setItem("isLoggedIn", [false]);
   window.location.reload(false);
 }

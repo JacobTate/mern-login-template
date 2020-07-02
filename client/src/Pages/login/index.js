@@ -3,7 +3,7 @@ import LoginForm from "../../components/loginForm";
 class Login extends Component {
   render() {
     return (
-      <div>
+      <div className="container">
           <LoginForm />
       </div>
     );

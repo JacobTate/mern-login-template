@@ -30,7 +30,6 @@ class ProfilePage extends Component {
   render() {
     return (
       <div>
-        <a href="/">Home</a>
         <ul>
           <li>{this.state.userFName}</li>
           <li>{this.state.userLName}</li>

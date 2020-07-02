@@ -5,10 +5,12 @@ import Signup from "../src/Pages/signUp";
 import ProfilePage from "../src/Pages/Profile";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
+import Nav from "../src/components/Navbar";
 class App extends Component {
   render() {
     return (
       <div>
+        <Nav />
         <Router>
           <div>
             <Switch>

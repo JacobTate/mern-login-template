@@ -33,13 +33,11 @@ class LoginForm extends Component {
       .then((res) => {
         console.log(res);
         if (!res.data.error) {
-          sessionStorage.setItem("LoginTemplateUser", [
-            res.data.data.email
-          ]);
+          sessionStorage.setItem("LoginTemplateUser", [res.data.data.email]);
           sessionStorage.setItem("LoginTemplatePassword", [
-            res.data.data.password
+            res.data.data.password,
           ]);
-          sessionStorage.setItem("isLoggedIn", [true])
+          sessionStorage.setItem("isLoggedIn", [true]);
           window.location.replace("/");
         } else {
           alert("somthing was incorrect");
@@ -48,8 +46,52 @@ class LoginForm extends Component {
   };
   render() {
     return (
-      <div>
-        <Container>
+      <div className="container">
+        <form
+          onSubmit={(event) => {
+            this.handeSubmit(event);
+            event.preventDefault();
+          }}
+        >
+              <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">
+              Email
+            </span>
+          </div>
+          <input
+              onChange={(event) => {
+                this.handeChange(event);
+              }}
+            type="email"
+            class="form-control"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm"
+            name="email"
+            required
+          ></input>
+        </div>
+
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">
+              Password
+            </span>
+          </div>
+          <input
+              onChange={(event) => {
+                this.handeChange(event);
+              }}
+            type="password"
+            class="form-control"
+            name="password"
+            required
+          ></input>
+        <button className="btn btn-primary" type="submit">Submit</button>
+        </div>
+        </form>
+    
+        {/* <Container>
           <form
             onSubmit={(event) => {
               this.handeSubmit(event);
@@ -74,10 +116,11 @@ class LoginForm extends Component {
             ></input>
             <Button color="primary">Submit</Button>
           </form>
-        </Container>
+        </Container> */}
         <a href="/signup">No account? Make one!</a>
       </div>
     );
   }
 }
 export default LoginForm;
+   
