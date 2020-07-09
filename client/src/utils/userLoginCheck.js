@@ -17,11 +17,8 @@ export class getUserInfo {
   }
   getUserData() {
     axios
-      .post(`/api/getUserInfo/`, {
-        email: this.state.email,
-        password: this.state.password,
-      })
-      .then((res) => {
+      .get(`/api/getUserInfo/${this.state.email}/${this.state.password}`)
+      .then(res => {
         this.state.userInfo = res.data;
         console.log(res.data);
       });

@@ -42,8 +42,8 @@ module.exports = (app) => {
         }
       });
   });
-  app.post("/api/getUserInfo", (req, res) => {
-    const userInfo = req.body;
+  app.get("/api/getUserInfo/:email/:password", (req, res) => {
+    const userInfo = req.params;
     Users.findOne({
       email: userInfo.email,
       password: userInfo.password,
