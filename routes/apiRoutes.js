@@ -54,4 +54,23 @@ module.exports = (app) => {
       };
     });
   });
+  app.put("/api/changePassword", (req, res) => {
+     console.log(req.body);
+     const passwordData = req.body;
+     const passwordId = mongoose.Types.ObjectId(passwordData.id)
+    //  Users.findOneAndUpdate({
+    //    password: userData.oldPass
+    //  },
+    //  {
+    //    password: userData.newPass
+    //  }
+    //  )
+ //   Users.updateMany({password: userData.oldPass}, {$set: {password: userData.newPass}})
+// Users.replaceOne({ password: userData.oldPass }, { password: userData.newPass});
+Users.findByIdAndUpdate({_id: passwordId}, {password: passwordData.newPass}, (err, result) => {
+  if(err) throw err
+})
+
+
+  })
 };

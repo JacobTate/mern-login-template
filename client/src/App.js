@@ -3,6 +3,7 @@ import HomePage from "../src/Pages/home";
 import Login from "../src/Pages/login";
 import Signup from "../src/Pages/signUp";
 import ProfilePage from "../src/Pages/Profile";
+import Users from "../src/Pages/Users";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Nav from "../src/components/Navbar";
@@ -22,6 +23,9 @@ class App extends Component {
               </Route>
               <Route path="/profile">
                 <ProfilePage />
+              </Route>
+              <Route exact path="/users/:name">
+                <Users/>
               </Route>
               <Route path="/">
                 <HomePage />

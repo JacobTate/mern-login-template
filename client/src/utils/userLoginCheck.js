@@ -18,7 +18,7 @@ export class getUserInfo {
   getUserData() {
     axios
       .get(`/api/getUserInfo/${this.state.email}/${this.state.password}`)
-      .then(res => {
+      .then((res) => {
         this.state.userInfo = res.data;
         console.log(res.data);
       });
@@ -32,4 +32,12 @@ export function logOut() {
   sessionStorage.removeItem("LoginTemplatePassword");
   sessionStorage.setItem("isLoggedIn", [false]);
   window.location.reload(false);
+}
+export function changePassword(oldPass, newPass, id) {
+  sessionStorage.setItem("LoginTemplatePassword",  [newPass])
+  axios.put("/api/changePassword", {
+    oldPass,
+    newPass,
+    id
+  });
 }

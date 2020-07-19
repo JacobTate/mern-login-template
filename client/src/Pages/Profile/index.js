@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-import { sessionStorageCheck, getUserInfo } from "../../utils/userLoginCheck";
+import {
+  sessionStorageCheck,
+  getUserInfo,
+  changePassword,
+} from "../../utils/userLoginCheck";
 const userCreds = sessionStorageCheck();
 const userInfo = new getUserInfo(userCreds.email, userCreds.password);
 userInfo.getUserData();
@@ -10,6 +14,10 @@ class ProfilePage extends Component {
       userFName: "",
       userLName: "",
       userEmail: "",
+      userPass: "",
+      userId: "",
+      currentPass: "",
+      newPass: "",
     };
   }
   componentDidMount() {
@@ -23,10 +31,25 @@ class ProfilePage extends Component {
         userFName: userData.firstName,
         userLName: userData.lastName,
         userEmail: userData.email,
+        userPass: userData.password,
+        userId: userData._id
       });
-    }, 500);
+    }, 600);
   }
-
+  handleChange = (event) => {
+    if (event.target.name === "currentPass") {
+      this.setState({ currentPass: event.target.value });
+    } else if (event.target.name === "newPass") {
+      this.setState({ newPass: event.target.value });
+    }
+  };
+  formSubmit = (event) => {
+    if (this.state.currentPass === this.state.userPass) {
+      changePassword(this.state.currentPass, this.state.newPass, this.state.userId);
+    }else{
+      alert("Incorrect password")
+    }
+  };
   render() {
     return (
       <div>
@@ -35,6 +58,35 @@ class ProfilePage extends Component {
           <li>{this.state.userLName}</li>
           <li>{this.state.userEmail}</li>
         </ul>
+        <div className="jumbotron">
+          <form
+            onSubmit={(event) => {
+              this.formSubmit(event);
+            }}
+          >
+            <input
+              onChange={(event) => {
+                this.handleChange(event);
+              }}
+              type="password"
+              name="currentPass"
+              placeholder="Current password"
+              required
+            ></input>
+            <input
+              onChange={(event) => {
+                this.handleChange(event);
+              }}
+              type="password"
+              name="newPass"
+              placeholder="New password"
+              required
+            ></input>
+            <button type="submit" className="btn btn-primary">
+              Change
+            </button>
+          </form>
+        </div>
       </div>
     );
   }
