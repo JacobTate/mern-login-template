@@ -14,6 +14,9 @@ const UserSchema = new Schema({
   password: {
     type: String,
   },
+  route: {
+    type: String,
+  },
 });
 const Users = mongoose.model("Users", UserSchema);
 module.exports = Users;
