@@ -45,7 +45,7 @@ class ProfilePage extends Component {
   };
   formSubmit = (event) => {
     if (this.state.currentPass === this.state.userPass) {
-      changePassword(this.state.currentPass, this.state.newPass, this.state.userId);
+      changePassword(this.state.currentPass, this.state.newPass, this.state.userId );
     }else{
       alert("Incorrect password")
     }

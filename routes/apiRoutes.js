@@ -70,4 +70,10 @@ module.exports = (app) => {
     res.json(data);
   })
   });
+  app.get("/api/getUser/:route", (req, res) => {
+    const route  = req.params.route
+      Users.findOne({route: route}).then(data => {
+        console.log(data);
+      })
+  })
 };
