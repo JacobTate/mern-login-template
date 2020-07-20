@@ -66,14 +66,19 @@ module.exports = (app) => {
     );
   });
   app.get("/api/getUsers", (req, res) => {
-  Users.find({}).then(data => {
-    res.json(data);
-  })
+    Users.find({}).then((data) => {
+      res.json(data);
+    });
   });
   app.get("/api/getUser/:route", (req, res) => {
-    const route  = req.params.route
-      Users.findOne({route: route}).then(data => {
-        console.log(data);
-      })
-  })
+    const route = req.params.route;
+    Users.findOne({ route: route }).then((data) => {
+      console.log(data);
+      if (data === null) {
+        res.json({ error: true });
+      } else {
+        res.json({ error: false, data });
+      }
+    });
+  });
 };
