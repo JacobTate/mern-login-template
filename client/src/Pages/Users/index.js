@@ -6,7 +6,8 @@ class Users extends Component {
   render() {
     return (
       <div>
-        <button onClick={console.log(this.props.match.params)}>click</button>
+        <button onClick={()  => {console.log(this.props.match.params.route)}}>click</button>
+       
       </div>
     );
   }

@@ -4,15 +4,30 @@ import Login from "../src/Pages/login";
 import Signup from "../src/Pages/signUp";
 import ProfilePage from "../src/Pages/Profile";
 import Users from "../src/Pages/Users";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, BrowserRouter } from "react-router-dom";
 import "./App.css";
 import Nav from "../src/components/Navbar";
+import axios from "axios";
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      // users: [],
+    };
+  }
+  // componentDidMount() {
+  //   axios.get("/api/getUsers")
+  //   .then((res) => {
+  //     this.setState({users: res.data})
+  //   });
+  // }
   render() {
     return (
       <div>
         <Nav />
-        <Router>
+        {/* <Router> */}
+        <BrowserRouter>
+          {/* {this.state.users.map(user => (<link to={'/users/' + user.route} />))} */}
           <div>
             <Switch>
               <Route path="/signup">
@@ -24,15 +39,16 @@ class App extends Component {
               <Route path="/profile">
                 <ProfilePage />
               </Route>
-              <Route exact path="/users/:name">
-                <Users/>
-              </Route>
+              <Route exact path="/users/:route" component={Users}/>
+                
+             
               <Route path="/">
                 <HomePage />
               </Route>
             </Switch>
           </div>
-        </Router>
+          </BrowserRouter>
+        {/* </Router> */}
       </div>
     );
   }

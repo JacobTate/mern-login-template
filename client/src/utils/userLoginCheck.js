@@ -41,3 +41,6 @@ export function changePassword(oldPass, newPass, id) {
     id
   });
 }
+export function findAllUsers(){
+  
+}
