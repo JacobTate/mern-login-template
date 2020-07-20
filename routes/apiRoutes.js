@@ -73,7 +73,6 @@ module.exports = (app) => {
   app.get("/api/getUser/:route", (req, res) => {
     const route = req.params.route;
     Users.findOne({ route: route }).then((data) => {
-      console.log(data);
       if (data === null) {
         res.json({ error: true });
       } else {

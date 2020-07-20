@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import ErrorPage from "../../components/Error"
 class Users extends Component {
   constructor(props) {
     super(props);
@@ -14,10 +15,20 @@ class Users extends Component {
       this.setState({ error: res.data.error, userData: res.data.data });
     });
   }
+  showUserData  = (userData) => {
+   const userDataArr = [userData.firstName, userData.lastName, userData.email]
+    return(
+    <div>
+     <ul>
+    {userDataArr.map(data => (<li>{data}</li>))}
+     </ul>
+    </div>
+    )
+  }
   render() {
     return (
       <div>
-        <button onClick={() => {console.log(this.state)}}>asdf</button>
+        {this.state.error ? <ErrorPage />: this.showUserData(this.state.userData)}
       </div>
     );
   }
