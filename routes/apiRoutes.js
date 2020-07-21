@@ -99,4 +99,10 @@ module.exports = (app) => {
       }
     );
   });
+  app.get("/api/getAllUsers", (req, res) => {
+         Users.find({}).then(data => {
+           console.log(data);
+           res.json(data)
+         })
+  });
 };

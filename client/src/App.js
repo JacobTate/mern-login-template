@@ -7,27 +7,13 @@ import Users from "../src/Pages/Users";
 import { BrowserRouter as Router, Switch, Route, BrowserRouter } from "react-router-dom";
 import "./App.css";
 import Nav from "../src/components/Navbar";
-import axios from "axios";
+import AdmenPage from "../src/Pages/AdmenPage"
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      // users: [],
-    };
-  }
-  // componentDidMount() {
-  //   axios.get("/api/getUsers")
-  //   .then((res) => {
-  //     this.setState({users: res.data})
-  //   });
-  // }
   render() {
     return (
       <div>
         <Nav />
-        {/* <Router> */}
         <BrowserRouter>
-          {/* {this.state.users.map(user => (<link to={'/users/' + user.route} />))} */}
           <div>
             <Switch>
               <Route path="/signup">
@@ -40,15 +26,15 @@ class App extends Component {
                 <ProfilePage />
               </Route>
               <Route exact path="/users/:route" component={Users}/>
-                
-             
+              <Route path="/admen/allAccounts">
+                <AdmenPage />
+              </Route>
               <Route path="/">
                 <HomePage />
               </Route>
             </Switch>
           </div>
           </BrowserRouter>
-        {/* </Router> */}
       </div>
     );
   }

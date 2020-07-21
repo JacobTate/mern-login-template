@@ -9,8 +9,15 @@ constructor(props){
 }
 componentDidMount(){
     axios.get("/api/getAllUsers").then(res => {
-        
+        this.setState({userArr: res.data})
     })
+}
+render(){
+    return(
+        <div>
+            <button onClick={() => {console.log(this.state)}}>Click</button>
+        </div>
+    )
 }
 }
 export default AdmenPage;
