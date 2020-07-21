@@ -1,4 +1,7 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const saltRounds = 13;
+// compareSync(myPlaintextPassword1, hash)
 mongoose.connect("mongodb://localhost/LoginTemplate", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -13,23 +16,28 @@ module.exports = (app) => {
           return res.json({ error: true });
         }
       } else {
-        Users.create({
-          firstName: userData.firstName,
-          lastName: userData.lastName,
-          email: userData.email,
-          password: userData.password,
-          route: `${userData.firstName}-${userData.lastName}`,
-          isAdmen: false
-        });
+        bcrypt.genSalt(saltRounds, function (err, salt) {
+          bcrypt.hash(userData.password, salt, function (err, hash) {
+            Users.create({
+              firstName: userData.firstName,
+              lastName: userData.lastName,
+              email: userData.email,
+              password: hash,
+              route: `${userData.firstName}-${userData.lastName}`,
+              isAdmen: false,
+            });
         return res.json({ error: false });
+          });
+        });
       }
     });
   });
   app.post("/api/login/", (req, res) => {
     Users.findOne({ email: req.body.email })
       .then((data) => {
+        console.log(data);
         if (data !== null) {
-          if (data.password === req.body.password) {
+          if (bcrypt.compareSync(req.body.password, data.password)) {
             res.json({ data, error: false });
           } else {
             res.json({ data: null, error: true });
@@ -82,7 +90,7 @@ module.exports = (app) => {
     });
   });
   app.put("/api/changeAccountType", (req, res) => {
-  const accountId = req.body.accountId
+    const accountId = req.body.accountId;
     Users.findByIdAndUpdate(
       { _id: accountId },
       { isAdmen: true },
@@ -90,5 +98,5 @@ module.exports = (app) => {
         if (err) throw err;
       }
     );
-  })
+  });
 };

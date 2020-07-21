@@ -46,7 +46,6 @@ class SignUpForm extends Component {
           alert(`A user with this email already exists.`);
         } else {
           logIn(this.state.email, this.state.password)
-          //window.location.reload(false);
         };
       });
   };
