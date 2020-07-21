@@ -17,6 +17,9 @@ const UserSchema = new Schema({
   route: {
     type: String,
   },
+  isAdmen: {
+    type: Boolean
+  }
 });
 const Users = mongoose.model("Users", UserSchema);
 module.exports = Users;

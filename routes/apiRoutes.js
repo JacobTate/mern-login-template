@@ -19,6 +19,7 @@ module.exports = (app) => {
           email: userData.email,
           password: userData.password,
           route: `${userData.firstName}-${userData.lastName}`,
+          isAdmen: false
         });
         return res.json({ error: false });
       }
@@ -80,4 +81,14 @@ module.exports = (app) => {
       }
     });
   });
+  app.put("/api/changeAccountType", (req, res) => {
+  const accountId = req.body.accountId
+    Users.findByIdAndUpdate(
+      { _id: accountId },
+      { isAdmen: true },
+      (err, result) => {
+        if (err) throw err;
+      }
+    );
+  })
 };

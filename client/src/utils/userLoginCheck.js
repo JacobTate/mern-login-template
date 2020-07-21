@@ -41,3 +41,8 @@ export function changePassword(oldPass, newPass, id) {
     id
   });
 }
+export function changeAccountType(accountId){
+axios.put("/api/changeAccountType", {
+  accountId
+})
+}

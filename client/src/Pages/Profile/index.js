@@ -3,6 +3,7 @@ import {
   sessionStorageCheck,
   getUserInfo,
   changePassword,
+  changeAccountType,
 } from "../../utils/userLoginCheck";
 const userCreds = sessionStorageCheck();
 const userInfo = new getUserInfo(userCreds.email, userCreds.password);
@@ -32,7 +33,7 @@ class ProfilePage extends Component {
         userLName: userData.lastName,
         userEmail: userData.email,
         userPass: userData.password,
-        userId: userData._id
+        userId: userData._id,
       });
     }, 600);
   }
@@ -45,9 +46,13 @@ class ProfilePage extends Component {
   };
   formSubmit = (event) => {
     if (this.state.currentPass === this.state.userPass) {
-      changePassword(this.state.currentPass, this.state.newPass, this.state.userId );
-    }else{
-      alert("Incorrect password")
+      changePassword(
+        this.state.currentPass,
+        this.state.newPass,
+        this.state.userId
+      );
+    } else {
+      alert("Incorrect password");
     }
   };
   render() {
@@ -86,6 +91,7 @@ class ProfilePage extends Component {
               Change
             </button>
           </form>
+          <button onClick={() => {changeAccountType(this.state.userId)}} className="btn btn-primary">Change to admen account</button>
         </div>
       </div>
     );
