@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Container, Button } from "reactstrap";
-import axios from "axios";
+import {logIn} from "../../utils/userLoginCheck"
 class LoginForm extends Component {
   constructor(props) {
     super(props);
@@ -24,32 +23,12 @@ class LoginForm extends Component {
         break;
     }
   };
-  handeSubmit = () => {
-    axios
-      .post(`/api/login`, {
-        email: this.state.email,
-        password: this.state.password,
-      })
-      .then((res) => {
-        console.log(res);
-        if (!res.data.error) {
-          sessionStorage.setItem("LoginTemplateUser", [res.data.data.email]);
-          sessionStorage.setItem("LoginTemplatePassword", [
-            res.data.data.password,
-          ]);
-          sessionStorage.setItem("isLoggedIn", [true]);
-          window.location.replace("/");
-        } else {
-          alert("somthing was incorrect");
-        }
-      });
-  };
   render() {
     return (
       <div className="container">
         <form
           onSubmit={(event) => {
-            this.handeSubmit(event);
+            logIn(this.state.email, this.state.password)
             event.preventDefault();
           }}
         >

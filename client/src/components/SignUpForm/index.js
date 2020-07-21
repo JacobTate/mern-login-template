@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Container, Button } from "reactstrap";
+import {logIn} from "../../utils/userLoginCheck"
 import axios from "axios";
 class SignUpForm extends Component {
   constructor(props) {
@@ -44,7 +45,8 @@ class SignUpForm extends Component {
         if (err.data.error) {
           alert(`A user with this email already exists.`);
         } else {
-          window.location.reload(false);
+          logIn(this.state.email, this.state.password)
+          //window.location.reload(false);
         };
       });
   };

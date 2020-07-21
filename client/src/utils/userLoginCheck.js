@@ -5,6 +5,26 @@ export function sessionStorageCheck() {
   const isLoggedIn = sessionStorage.getItem("isLoggedIn");
   return { isLoggedIn: isLoggedIn, email: getUser, password: getPassword };
 }
+export function logIn (email, password){
+  axios
+  .post(`/api/login`, {
+    email,
+    password
+  })
+  .then((res) => {
+    console.log(res);
+    if (!res.data.error) {
+      sessionStorage.setItem("LoginTemplateUser", [res.data.data.email]);
+      sessionStorage.setItem("LoginTemplatePassword", [
+        res.data.data.password,
+      ]);
+      sessionStorage.setItem("isLoggedIn", [true]);
+      window.location.replace("/");
+    } else {
+      alert("somthing was incorrect");
+    }
+  });
+}
 export class getUserInfo {
   constructor(email, password) {
     this.email = email;

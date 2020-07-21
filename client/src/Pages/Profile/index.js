@@ -12,11 +12,7 @@ class ProfilePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userFName: "",
-      userLName: "",
-      userEmail: "",
-      userPass: "",
-      userId: "",
+      userData: {},
       currentPass: "",
       newPass: "",
     };
@@ -29,11 +25,7 @@ class ProfilePage extends Component {
     setTimeout(() => {
       const userData = userInfo.showUserData();
       this.setState({
-        userFName: userData.firstName,
-        userLName: userData.lastName,
-        userEmail: userData.email,
-        userPass: userData.password,
-        userId: userData._id,
+       userData: userData
       });
     }, 600);
   }
@@ -45,11 +37,11 @@ class ProfilePage extends Component {
     }
   };
   formSubmit = (event) => {
-    if (this.state.currentPass === this.state.userPass) {
+    if (this.state.currentPass === this.state.userData.password) {
       changePassword(
         this.state.currentPass,
         this.state.newPass,
-        this.state.userId
+        this.state.userData._id
       );
     } else {
       alert("Incorrect password");
@@ -59,9 +51,9 @@ class ProfilePage extends Component {
     return (
       <div>
         <ul>
-          <li>{this.state.userFName}</li>
-          <li>{this.state.userLName}</li>
-          <li>{this.state.userEmail}</li>
+          <li>{this.state.userData.firstName}</li>
+          <li>{this.state.userData.lastName}</li>
+          <li>{this.state.userData.email}</li>
         </ul>
         <div className="jumbotron">
           <form
@@ -91,7 +83,14 @@ class ProfilePage extends Component {
               Change
             </button>
           </form>
-          <button onClick={() => {changeAccountType(this.state.userId)}} className="btn btn-primary">Change to admen account</button>
+          <button
+            onClick={() => {
+              changeAccountType(this.state.userData._id);
+            }}
+            className="btn btn-primary"
+          >
+            Change to admen account
+          </button>
         </div>
       </div>
     );
