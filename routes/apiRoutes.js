@@ -26,7 +26,7 @@ module.exports = (app) => {
               route: `${userData.firstName}-${userData.lastName}`,
               isAdmen: false,
             });
-        return res.json({ error: false });
+            return res.json({ error: false });
           });
         });
       }
@@ -57,11 +57,12 @@ module.exports = (app) => {
     Users.findOne({
       email: userInfo.email,
       password: userInfo.password,
-    }).then((data) => {
-      if (data) {
-        res.json(data);
-      }
-    });
+    })
+      .then((data) => {
+        if (data) {
+          res.json(data);
+        }
+      });
   });
   app.put("/api/changePassword", (req, res) => {
     const passwordData = req.body;
@@ -100,9 +101,8 @@ module.exports = (app) => {
     );
   });
   app.get("/api/getAllUsers", (req, res) => {
-         Users.find({}).then(data => {
-           console.log(data);
-           res.json(data)
-         })
+    Users.find({}).then((data) => {
+      res.json(data);
+    });
   });
 };

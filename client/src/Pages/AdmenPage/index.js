@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios"
+import UserCard from "../../components/UserCard";
 class AdmenPage extends Component{
 constructor(props){
     super(props);
@@ -15,7 +16,7 @@ componentDidMount(){
 render(){
     return(
         <div>
-            <button onClick={() => {console.log(this.state)}}>Click</button>
+            {this.state.userArr.map(user => <UserCard user={user} />)}
         </div>
     )
 }

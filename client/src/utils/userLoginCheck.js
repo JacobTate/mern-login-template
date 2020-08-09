@@ -40,8 +40,7 @@ export class getUserInfo {
       .get(`/api/getUserInfo/${this.state.email}/${this.state.password}`)
       .then((res) => {
         this.state.userInfo = res.data;
-        console.log(res.data);
-      });
+      }).catch(err => {throw err;})
   }
   showUserData() {
     return this.state.userInfo;
