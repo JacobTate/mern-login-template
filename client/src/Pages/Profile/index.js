@@ -54,6 +54,7 @@ class ProfilePage extends Component {
           <li>{this.state.userData.firstName}</li>
           <li>{this.state.userData.lastName}</li>
           <li>{this.state.userData.email}</li>
+          <li>{this.state.userData.isAdmen ? "You are an admin" : "You are not an admin"}</li>
         </ul>
         <div className="jumbotron">
           <form
@@ -83,14 +84,16 @@ class ProfilePage extends Component {
               Change
             </button>
           </form>
-          <button
+          {this.state.userData.isAdmen ? null :   <button
             onClick={() => {
-              changeAccountType(this.state.userData._id);
-            }}
+             changeAccountType(this.state.userData._id);
+                        }}
             className="btn btn-primary"
           >
-            Change to admen account
-          </button>
+            Change to admin account
+          </button>}
+
+        
         </div>
       </div>
     );

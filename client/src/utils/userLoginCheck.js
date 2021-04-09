@@ -5,25 +5,25 @@ export function sessionStorageCheck() {
   const isLoggedIn = sessionStorage.getItem("isLoggedIn");
   return { isLoggedIn: isLoggedIn, email: getUser, password: getPassword };
 }
-export function logIn (email, password){
+export function logIn(email, password) {
   axios
-  .post(`/api/login`, {
-    email,
-    password
-  })
-  .then((res) => {
-    console.log(res);
-    if (!res.data.error) {
-      sessionStorage.setItem("LoginTemplateUser", [res.data.data.email]);
-      sessionStorage.setItem("LoginTemplatePassword", [
-        res.data.data.password,
-      ]);
-      sessionStorage.setItem("isLoggedIn", [true]);
-      window.location.replace("/");
-    } else {
-      alert("somthing was incorrect");
-    }
-  });
+    .post(`/api/login`, {
+      email,
+      password,
+    })
+    .then((res) => {
+      console.log(res);
+      if (!res.data.error) {
+        sessionStorage.setItem("LoginTemplateUser", [res.data.data.email]);
+        sessionStorage.setItem("LoginTemplatePassword", [
+          res.data.data.password,
+        ]);
+        sessionStorage.setItem("isLoggedIn", [true]);
+        window.location.replace("/");
+      } else {
+        alert("somthing was incorrect");
+      }
+    });
 }
 export class getUserInfo {
   constructor(email, password) {
@@ -40,7 +40,10 @@ export class getUserInfo {
       .get(`/api/getUserInfo/${this.state.email}/${this.state.password}`)
       .then((res) => {
         this.state.userInfo = res.data;
-      }).catch(err => {throw err;})
+      })
+      .catch((err) => {
+        throw err;
+      });
   }
   showUserData() {
     return this.state.userInfo;
@@ -53,15 +56,16 @@ export function logOut() {
   window.location.reload(false);
 }
 export function changePassword(oldPass, newPass, id) {
-  sessionStorage.setItem("LoginTemplatePassword",  [newPass])
+  sessionStorage.setItem("LoginTemplatePassword", [newPass]);
   axios.put("/api/changePassword", {
     oldPass,
     newPass,
-    id
+    id,
   });
 }
-export function changeAccountType(accountId){
-axios.put("/api/changeAccountType", {
-  accountId
-})
+export function changeAccountType(accountId) {
+  axios.put("/api/changeAccountType", {
+    accountId
+  });
+  window.location.reload(false);
 }
